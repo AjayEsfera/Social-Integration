@@ -172,12 +172,12 @@ passport.deserializeUser(function(user, done) {
  	done(null, user);
 });
 
-app.get('https://social-google-auth.herokuapp.com',routes.index);
-app.get('https://social-google-auth.herokuapp.com/logout',routes.logout);
-app.get('https://social-google-auth.herokuapp.com/dashboard',ensureLoggedIn,profile.dashboard);
-app.get('https://social-google-auth.herokuapp.com/auth/google',passport.authenticate('google',{scope:['profile','email']}));
-app.get('https://social-google-auth.herokuapp.com/auth/google/callback',passport.authenticate('google',{successRedirect:'/dashboard',successFlash: 'Welcome!',failureRedirect:'/',failureFlash: true}));
-app.post('https://social-google-auth.herokuapp.com/process', passport.authenticate('local', { successRedirect: '/dashboard',successFlash: 'Welcome!',failureRedirect: '/',failureFlash: true}));
+app.get('/',routes.index);
+app.get('/logout',routes.logout);
+app.get('/dashboard',ensureLoggedIn,profile.dashboard);
+app.get('/auth/google',passport.authenticate('google',{scope:['profile','email']}));
+app.get('/auth/google/callback',passport.authenticate('google',{successRedirect:'/dashboard',successFlash: 'Welcome!',failureRedirect:'/',failureFlash: true}));
+app.post('/process', passport.authenticate('local', { successRedirect: '/dashboard',successFlash: 'Welcome!',failureRedirect: '/',failureFlash: true}));
 app.get('/privacy',routes.privacy);
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on Ejsport ' + app.get('port'));
