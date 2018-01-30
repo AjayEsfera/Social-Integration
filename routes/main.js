@@ -13,7 +13,9 @@ exports.index = function(req, res) {
 	    });
         
     }
-
+exports.privacy = function(req,res){
+	res.render('privacy');
+}	
 // exports.process = function(req, res) {
         	
 // 		var email = req.body.email;
