@@ -44,6 +44,6 @@ exports.logout = function(req, res) {
 	 req.session.destroy(function(err) {
 	  if(err) throw err;
 	  console.log('Logout');
-	   res.redirect('/');
+	   res.redirect('https://social-google-auth.herokuapp.com');
 	 });
 }
