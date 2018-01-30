@@ -1,0 +1,35 @@
+include partials/header.jade
+body.login  
+   div.form-signin
+     div.text-center
+        img(src='./img/logo.png' alt='Site Logo')
+     hr
+     div.tab-content
+       div#login.tab-pane.active
+         form(method='post', action='/process')
+          p.text-muted.text-center Enter your username or password
+          input.form-control.top(type="email", name="email" placeholder="Enter Email")
+          input.form-control.bottom(type="password", name="password" placeholder="Enter Password")
+          button.btn.btn-lg.btn-primary.btn-block(type='submit') SignIn
+       div#forgot.tab-pane
+         form(action='')
+          p.text-muted.text-center Enter your valid e-mail
+          input.form-control(type="email", name="forgotemail" placeholder="mail@domain.com")
+          br
+          button.btn.btn-lg.btn-danger.btn-block(type='submit') Recover Password
+       div#signup.tab-pane
+         form(action='')
+          input.form-control.top(type='text' name='username' placeholder='Enter Username')
+          input.form-control.middle(type='email' name='email' placeholder='Enter Email')
+          input.form-control.middle(type='password' name='password' placeholder='Enter Password')
+          input.form-control.bottom(type='password' name='re-password' placeholder='Repeat Password')
+          button.btn.btn-lg.btn-success.btn-block(type='submit') Register
+       hr
+       div.text-center
+          ul.list-inline
+             li: a.text-muted(href="#login") Login 	
+             li: a.text-muted(href="#forgot") Forgot	
+             li: a.text-muted(href="#signup") Signup
+
+
+link(href="./js/tabsscript.js")
