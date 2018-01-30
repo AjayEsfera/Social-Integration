@@ -64,7 +64,7 @@ passport.use(new LocalStrategy({
 passport.use(new GoogleStrategy({
     clientID: '950125656138-d3anteokf43o0sbviqbvb0aqk2tadi0u.apps.googleusercontent.com',
     clientSecret: 'jDuuf60yzY1T_hzRM5oEdd18',
-    callbackURL: "http://localhost:3000/auth/google/callback"
+    callbackURL: "https://node-social-integration.herokuapp.com/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
   		// console.log(profile);
@@ -130,7 +130,7 @@ passport.use(new GoogleStrategy({
 passport.use(new FacebookStrategy({
     clientID: '338242206671278',
     clientSecret: 'd0b9d016565055e4fc624414d229bfce',
-    callbackURL: "http://localhost:3000/auth/google/callback"
+    callbackURL: "https://node-social-integration.herokuapp.com/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, done) {
   		 console.log(profile);
