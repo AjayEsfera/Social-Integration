@@ -64,7 +64,7 @@ passport.use(new LocalStrategy({
 passport.use(new GoogleStrategy({
     clientID: '950125656138-d3anteokf43o0sbviqbvb0aqk2tadi0u.apps.googleusercontent.com',
     clientSecret: 'jDuuf60yzY1T_hzRM5oEdd18',
-    callbackURL: "https://node-social-integration.herokuapp.com/auth/google/callback"
+    callbackURL: "https://social-google-auth.herokuapp.com/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
   		// console.log(profile);
@@ -172,12 +172,12 @@ passport.deserializeUser(function(user, done) {
  	done(null, user);
 });
 
-app.get('/',routes.index);
-app.get('/logout',routes.logout);
-app.get('/dashboard',ensureLoggedIn,profile.dashboard);
-app.get('/auth/google',passport.authenticate('google',{scope:['profile','email']}));
-app.get('/auth/google/callback',passport.authenticate('google',{successRedirect:'/dashboard',successFlash: 'Welcome!',failureRedirect:'/',failureFlash: true}));
-app.post('/process', passport.authenticate('local', { successRedirect: '/dashboard',successFlash: 'Welcome!',failureRedirect: '/',failureFlash: true}));
+app.get('https://social-google-auth.herokuapp.com',routes.index);
+app.get('https://social-google-auth.herokuapp.com/logout',routes.logout);
+app.get('https://social-google-auth.herokuapp.com/dashboard',ensureLoggedIn,profile.dashboard);
+app.get('https://social-google-auth.herokuapp.com/auth/google',passport.authenticate('google',{scope:['profile','email']}));
+app.get('https://social-google-auth.herokuapp.com/auth/google/callback',passport.authenticate('google',{successRedirect:'/dashboard',successFlash: 'Welcome!',failureRedirect:'/',failureFlash: true}));
+app.post('https://social-google-auth.herokuapp.com/process', passport.authenticate('local', { successRedirect: '/dashboard',successFlash: 'Welcome!',failureRedirect: '/',failureFlash: true}));
 app.get('/privacy',routes.privacy);
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on Ejsport ' + app.get('port'));
