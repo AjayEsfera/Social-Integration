@@ -127,7 +127,7 @@ passport.use(new GoogleStrategy({
 ));
 
 
-assport.use(new FacebookStrategy({
+passport.use(new FacebookStrategy({
     clientID: '144439312897177',
     clientSecret: '2755d76714af7191291ea8c32aeb0128',
     callbackURL: "https://social-google-auth.herokuapp.com/auth/facebook/callback"
