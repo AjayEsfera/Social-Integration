@@ -178,7 +178,7 @@ app.get('/dashboard',ensureLoggedIn,profile.dashboard);
 app.get('/auth/google',passport.authenticate('google',{scope:['profile','email']}));
 app.get('/auth/google/callback',passport.authenticate('google',{successRedirect:'/dashboard',successFlash: 'Welcome!',failureRedirect:'/',failureFlash: true}));
 app.post('/process', passport.authenticate('local', { successRedirect: '/dashboard',successFlash: 'Welcome!',failureRedirect: '/',failureFlash: true}));
-
+app.get('/privacy',routes.privacy);
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on Ejsport ' + app.get('port'));
 });
