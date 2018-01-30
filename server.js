@@ -127,36 +127,36 @@ passport.use(new GoogleStrategy({
 ));
 
 
-passport.use(new FacebookStrategy({
+assport.use(new FacebookStrategy({
     clientID: '144439312897177',
     clientSecret: '2755d76714af7191291ea8c32aeb0128',
     callbackURL: "https://social-google-auth.herokuapp.com/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, done) {
   		 console.log(profile);
-    //    User.find({ googleId: profile.id }, function (err, user) {
-       	// console.log(profile);
-       	MongoClient.connect(url, function(err, db) {
-         if(err) throw err;
-         	//return done(err, user);
-        if(users)
-          {
-             return done(null,users);
-          }	
-          if(!users)
-    	  {
-    		//db.collection("users").insert({googleId: profile.emails[0].value,displayname:profile.displayName,profile_pic:profile.photos[0].value}),function(err,users){
-    		if(err) throw err;
-    		//console.log("Inserted");
-                res.redirect('/');
-    		//return done(null,users);	
-    		//db.close();
-	   }
+    
+    //    	MongoClient.connect(url, function(err, db) {
+    //      if(err) throw err;
+         	
+    //     if(users)
+    //       {
+    //          return done(null,users);
+    //       }	
+    //       if(!users)
+    // 	  {
+    // 		//db.collection("users").insert({googleId: profile.emails[0].value,displayname:profile.displayName,profile_pic:profile.photos[0].value}),function(err,users){
+    // 		if(err) throw err;
+    // 		//console.log("Inserted");
+    //             res.redirect('/');
+    // 		//return done(null,users);	
+    // 		//db.close();
+	   // }
 
-       });
+    //    });
    
   }
 ));
+
 
 passport.serializeUser(function(user, done) {
   done(null, user);
