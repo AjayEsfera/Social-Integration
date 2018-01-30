@@ -128,9 +128,9 @@ passport.use(new GoogleStrategy({
 
 
 passport.use(new FacebookStrategy({
-    clientID: '338242206671278',
-    clientSecret: 'd0b9d016565055e4fc624414d229bfce',
-    callbackURL: "https://node-social-integration.herokuapp.com/auth/facebook/callback"
+    clientID: '144439312897177',
+    clientSecret: '2755d76714af7191291ea8c32aeb0128',
+    callbackURL: "https://social-google-auth.herokuapp.com/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, done) {
   		 console.log(profile);
@@ -139,28 +139,22 @@ passport.use(new FacebookStrategy({
        	MongoClient.connect(url, function(err, db) {
          if(err) throw err;
          	//return done(err, user);
-        db.collection("users").findOne({ googleId: profile.id }, function (err,users) {
-        	console.log(users);
-   //        if (err) { return done(err); }
-          
-           return done(null,users);
-   //       else{
-   //       	var newUser = new User();
-   //       	newUser.google.id = profile.id;
-   //       	newUser.google.token = accessToken;
-   //       	newUser.google.name = profile.displayName;
-   //       	newUser.google.email = profile.emails[0].value;  
-
-   //       	newUser.save(function(err){
-   //       		if(err)
-   //      		  throw err;
-   //      		return done(null,newUser);
-			// })
-			// console.log(profile);  
-   //       }
+        if(users)
+          {
+             return done(null,users);
+          }	
+          if(!users)
+    	  {
+    		//db.collection("users").insert({googleId: profile.emails[0].value,displayname:profile.displayName,profile_pic:profile.photos[0].value}),function(err,users){
+    		if(err) throw err;
+    		//console.log("Inserted");
+                res.redirect('/');
+    		//return done(null,users);	
+    		//db.close();
+	   }
 
        });
-   });
+   
   }
 ));
 
@@ -177,6 +171,8 @@ app.get('/logout',routes.logout);
 app.get('/dashboard',ensureLoggedIn,profile.dashboard);
 app.get('/auth/google',passport.authenticate('google',{scope:['profile','email']}));
 app.get('/auth/google/callback',passport.authenticate('google',{successRedirect:'/dashboard',successFlash: 'Welcome!',failureRedirect:'/',failureFlash: true}));
+app.get('/auth/facebook',passport.authenticate('facebook',{scope:['email']}));
+app.get('/auth/facebook/callback',passport.authenticate('facebook',{successRedirect:'/dashboard',successFlash: 'Welcome!',failureRedirect:'/',failureFlash: true}));
 app.post('/process', passport.authenticate('local', { successRedirect: '/dashboard',successFlash: 'Welcome!',failureRedirect: '/',failureFlash: true}));
 app.get('/privacy',routes.privacy);
 http.createServer(app).listen(app.get('port'), function(){
